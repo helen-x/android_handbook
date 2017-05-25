@@ -3,7 +3,8 @@
 * [介绍](README.md) 
 * [通用技术](通用技术/index.md)  
     - [UI](通用技术/UI/index.md)
-        - [技术1](通用技术/UI/index.md)
+        - [自定义view](通用技术/UI/index.md)
+            - [自定义View —— drawBitmap](自定义View —— drawBitmap.md) 
     - [基础](通用技术/基础/index.md)    
         - [技术1](通用技术/UI/index.md)
 * [专项技术](专享技术/index.md)  
@@ -40,3 +41,4 @@
 * [Java](Java/index.md)           
     - [基础](Java/基础/index.md) 
     - [算法](Java/算法/index.md) 
+
