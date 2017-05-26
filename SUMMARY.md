@@ -4,7 +4,7 @@
 * [通用技术](通用技术/index.md)  
     - [UI](通用技术/UI/index.md)
         - [自定义view](通用技术/UI/index.md)
-            - [自定义View —— drawBitmap](/自定义View —— drawBitmap.md) 
+            - [自定义View —— drawBitmap](通用技术/UI/自定义View —— drawBitmap.md) 
     - [基础](通用技术/基础/index.md)    
         - [技术1](通用技术/UI/index.md)
 * [专项技术](专享技术/index.md)  
