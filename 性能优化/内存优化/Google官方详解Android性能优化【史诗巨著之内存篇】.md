@@ -1,4 +1,6 @@
-# Google官方 详解 Android 性能优化【史诗巨著之内存篇】[作者:杨超凡](http://blog.csdn.net/chivalrousman/article/details/51553114#t16)
+# Google官方 详解 Android 性能优化【史诗巨著之内存篇】
+## [作者:杨超凡](http://blog.csdn.net/chivalrousman/article/details/51553114#t16)
+## 博客：http://blog.csdn.net/chivalrousman/article/details/51553114#t16
 ## 为什么关注性能
 对于一款APP，用户首先关注的是 app的性能，而不是APP本身的属性功能，用户不关心你是否是搞社交，是否搞电商，是否是一款强大的美图滤镜app，用户首先关注的是 性能—-性能不好，用户会直接卸载，在应用市场给一个恶狠狠得差评，小则影响产品口碑，大则影响公司的品牌和声誉，作为程序员，app的性能更应该作为我们关注的一个功能，而不是出了问题 才去门头苦恼加班加点的负担。
 
