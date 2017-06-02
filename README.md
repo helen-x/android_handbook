@@ -13,14 +13,15 @@
 
 ## 3. 协作  
 ### 人员(筹备组):  
-- 菜刀文
-- 关玮琳     
-- 熵  
+- [菜刀文](http://www.jianshu.com/u/ccabae3e72f2)   
+- [关玮琳](https://github.com/linsir6)     
+- [秦通](https://github.com/qintong91)   
+- [潇湘夜雨](https://github.com/xiaoxiangyeyuHeaven)  
+- [岳敏俊](https://github.com/BryanYue)     
+- [熵](https://github.com/shang1101)  
 - 追寻  
 - 梦里不知身是客   
-- 秦通   
 - 都是你松哥   
-- 岳敏俊    
 
 
 ### 如何贡献   
