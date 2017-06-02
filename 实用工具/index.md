@@ -1,1 +1,7 @@
-TODO
+- [adb用法大全](adb用法大全.md)  
+- [Genymotion安装配置指南](Genymotion安装配置指南.md) 
+- [Charles从入门到精通](Charles从入门到精通.md) 
+- [在github上创建个人博客，其实没有那么难](在github上创建个人博客_其实没有那么难.md)   
+- [一小时搞明白注解处理器(Annotation Processor Tool)](一小时搞明白注解处理器Annotation_Processor_Tool.md)    
+- [海量AndroidStudio颜色主题](海量AndroidStudio颜色主题.md)   
+- [Android Studio插件大全](AndroidStudio插件大全.md)   
