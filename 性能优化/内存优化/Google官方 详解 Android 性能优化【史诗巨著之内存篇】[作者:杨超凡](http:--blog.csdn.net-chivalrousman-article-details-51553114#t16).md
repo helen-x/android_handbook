@@ -1,5 +1,5 @@
-#Google官方 详解 Android 性能优化【史诗巨著之内存篇】[作者:杨超凡](http://blog.csdn.net/chivalrousman/article/details/51553114#t16)
-##为什么关注性能
+# Google官方 详解 Android 性能优化【史诗巨著之内存篇】[作者:杨超凡](http://blog.csdn.net/chivalrousman/article/details/51553114#t16)
+## 为什么关注性能
 对于一款APP，用户首先关注的是 app的性能，而不是APP本身的属性功能，用户不关心你是否是搞社交，是否搞电商，是否是一款强大的美图滤镜app，用户首先关注的是 性能—-性能不好，用户会直接卸载，在应用市场给一个恶狠狠得差评，小则影响产品口碑，大则影响公司的品牌和声誉，作为程序员，app的性能更应该作为我们关注的一个功能，而不是出了问题 才去门头苦恼加班加点的负担。
 
 **老实说，提高app性能的确非常难，处理这些问题 你必须知道：**
@@ -12,7 +12,7 @@
 1.了解这些工具并用它们找到造成性能不好的原因
 2.从理论角度了解它们
 
-##如何优化app的性能？
+## 如何优化app的性能？
 **性能优化听上去是一项非常艰巨的功能，但仔细思考，其实非常简单：**
 1.获取信息:
 有人说你应用慢，应用闪退（崩掉，crash掉）的时候你需要找到原因。通过运行 分析和反馈工具软件来收集应用相关的信息，我们需要明确哪些可以测量，哪些可以优化也就是说任何应用开始优化时，整个过程取决于问题的可测性以及性能优化的可评价性。 开发中经常遇到的坎，问题不可复现，以及对于某一个细节是否需要优化 拿不定主意，这个需要我们自己身处其境 考虑分析各方面因素 得出结论，而不是纯粹得靠感觉。
@@ -23,7 +23,7 @@
 
 ```工具不是规则，理解事物的规则和流程更重要```
 
-##为什么关注内存
+## 为什么关注内存
 ```内存大小属于手机性能之一```
 
 举个简单的例子，内存就像你的卧室一样，当你在老家住着动辄几百平的村庄，舒服惯了，突然变卖家产一门心思想创业来到北京，家里的老本只够你住几平米的卫生间的时候，你就会注意到内存【房间】大小的重要性了。
@@ -35,7 +35,7 @@
 
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/12a89c01adce51b97a72f7d025e9a47372b58006/333.png)
 
-###java垃圾回收机制官方详解
+### java垃圾回收机制官方详解
 ```java中的JVM就是一个抽象的计算机，和实际的计算机一样，它具有指令集并使用不同的存储区域，JVM负责执行代码，管理数据，管理内存和寄存器。```
 
 垃圾回收机制只做两件基本的事情：
@@ -54,7 +54,7 @@
 java8 已经删除了永生代内存，即一些常驻内存，不会回收的数据，而是改为使用本地内存来存储类的元数据，称之为元空间（Metaspace），不过貌似和Android开发没关系(-__-)。
 
 回顾完java垃圾回收，下面介绍
-###Android 自己的回收机制-Runtime 回收机制
+### Android 自己的回收机制-Runtime 回收机制
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/androidruntimeheap.png)
 
 经由为数据分配内存的类型，以及系统如何有效的利用gc回收内存，并为新的对象分配内存。
@@ -75,7 +75,7 @@ java8 已经删除了永生代内存，即一些常驻内存，不会回收的�
 综合三张图分析：代码质量很差，使得系统为我们的app分配了过多内存，而且没有及时回收，系统需要更多的时间去执行gc回收，那么系统就没时间去保持界面的活跃，所以就造成了卡顿的现象。
 ```在一个循环体中，重复得创建对象，就会造成内存污染，马上就会有很多gc 启动，由于这一额外的内存压力，内存泄漏仍然会产生，当可用内存降低到一定总量时，会强制系统gc执行，那循环体中的那部分操作会显示出卡顿的情况，甚至有可能在内存极限的时候，我们开发的应用会闪退。```
 **所以，唯一的解决办法是：减少代码申请的内存量，不使用的对象及时回收。**
-####使用内存分析工具Memory Monitor
+#### 使用内存分析工具Memory Monitor
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc4.png)
 整个层叠图，代表还有多少内存可用 
 深蓝色区域：代表正在使用的内存大小 
@@ -88,11 +88,11 @@ java8 已经删除了永生代内存，即一些常驻内存，不会回收的�
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc6.png)
 **分析:**
 <font color=#FF0000>这里有一部分代码占用了大量的内存，然后又一下子释放了内存，生成不断重复又窄又长的曲线，这就是程序在花大量的时间在进行垃圾清理，运行垃圾清理的时间越多，其他操作可用的时间就越少，比如跟网络交互数据，页面刷新，打电话，听歌等等，这样就造成了卡顿.</font>
-####使用Montior过程中遇到的 No Debugable Application的问题
+#### 使用Montior过程中遇到的 No Debugable Application的问题
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior.png)
 ```solution：Tools-Android-Android adb interact 最初并不会见效，重启app即可.```
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior2.png)
-###内存泄漏
+### 内存泄漏
 在这里我才开始引入内存泄漏的原因【虽然文章前面已经提到，但是在这里才着重拿出来作为一节】
 
 网络上和一些书籍对内存泄漏解释是 应该回收的对象没有回收，有点不全面，我认为深一点来说，内存泄漏是针对系统而言的，内存泄漏指的是不能被使用的内存，但是垃圾回收器无法识别出来，对其进行回收，这些对象一直存在于堆中，并且持续占据着内存空间，无法被删除，随着不断泄漏，系统可用的内存就越来越小，意味着系统又需要花更多的时间 去进行内存清理操作，进行垃圾回收操作的次数越来越多.
@@ -103,7 +103,7 @@ java8 已经删除了永生代内存，即一些常驻内存，不会回收的�
 ```了解Heap Viewer: Heap Viewer可以有效的分析程序在堆中分配的数据类型及数量和 大小小```
 ![](http://img.blog.csdn.net/20160601160253124)
 ```这里表示 byte数组和boolean数组的数量为177，占用了1.423M的内存```
-###内存泄漏的情况
+### 内存泄漏的情况
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc7.png)
 
 绿色箭头标出来的那部分 代码就是有问题的部分，原因在于，可以内存几乎为0，所有的内存已经被程序占用，首先记住，我们的代码有问题，造成了内存泄漏，并且，垃圾回收机制无法回收那部分内存空间
@@ -112,11 +112,11 @@ java8 已经删除了永生代内存，即一些常驻内存，不会回收的�
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc8.png)
 
 启动第二次gc，此时Android调整并提高应用的内存上限，这样做的同时，如果漏洞没有修复，表明内存泄漏仍然存在，那么还会有第三次，第四次同样的gc操作，直至系统无法调整提高给应用更高的内存上限，造成内存溢出，甚至可能死机.
-###Trace Viewer分配追踪器
+### Trace Viewer分配追踪器
 ![](http://img.blog.csdn.net/20160601164024041)
 ```Trace Viewer可以精确追踪到代码的位置，限于篇幅请按照上图点击 那几个按钮 自行摸索考功它的功能能```
 
-##高效加载图片图片
+## 高效加载图片图片
 **为什么只关注图片加载，而不去处理其他数据来解决内存不足的问题？**
 
 1.Android 加载图片会创建Bitmap,drawable实例，占用内存空间，如果不进行高效处理，程序会很快达到 Android系统分配给APP的内存上限，直至挂掉
@@ -136,7 +136,7 @@ java8 已经删除了永生代内存，即一些常驻内存，不会回收的�
 1. 不能超过每个应用程序的内存限制 
 2. 用最小的内存加载图片
 **只需三步**
-####1. 读取内存中Bitmap的尺寸和类型BitmapFactory类提供了很多解析Bitmap的方法（decodeByteArray(), decodeFile(), decodeResource(), etc.），每一种解析方法都有一个额外的参数BitmapFactory.Options，设置inJustDecodeBounds 属性为true可以禁止应用分配内存，此时bitmap返回为null，但是我们可以通过BitmapFactory.Options对象来获取很多有用的参数此时 你可以通过BitmapFactory.Options来读取图片的尺寸和类型
+#### 1. 读取内存中Bitmap的尺寸和类型BitmapFactory类提供了很多解析Bitmap的方法（decodeByteArray(), decodeFile(), decodeResource(), etc.），每一种解析方法都有一个额外的参数BitmapFactory.Options，设置inJustDecodeBounds 属性为true可以禁止应用分配内存，此时bitmap返回为null，但是我们可以通过BitmapFactory.Options对象来获取很多有用的参数此时 你可以通过BitmapFactory.Options来读取图片的尺寸和类型
 ```BitmapFactory.Options options = new BitmapFactory.Options();
 options.inJustDecodeBounds = true;
 BitmapFactory.decodeResource(getResources(), R.id.myimage, options);
@@ -147,7 +147,7 @@ String imageType = options.outMimeType;
 
 ```总结：为了避免java.lang.OutOfMemory ，在加载图片之前需要检查原图的大小是否超出最低内存限制。```
 
-####2.加载一张小图，使得系统分配较少的内存给它。
+#### 2.加载一张小图，使得系统分配较少的内存给它。
 ```现在我们已经获取到了图片的尺寸，加载一张图片之前，我们需要考虑：```
 
 * 计算整张图片需要多大的内存
@@ -200,13 +200,13 @@ public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
 }
 ```
 `研究一个新的函数，我们先关注函数的输入和输出提高阅读能力`
-####3.接着为我们的UI组件ImageView设置一张缩略图咯：**
+#### 3.接着为我们的UI组件ImageView设置一张缩略图咯：**
 ```
 mImageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.id.myimage, 100, 100));
 ```
 **为了完全理解这一部分，初学者请自行查阅1.BitmapFactory.decode2.BitmapFactory.Options**
 
-###使AsyncTask加载Bitmap
+### 使AsyncTask加载Bitmap
 当图片资源来自网络或者硬盘的时候，最好不要直接在主线程中加载它，例如IO资源或者数据库资源都会占用CPU，CPU 要做的事情过多，Android手机会造成卡顿得现象，
 
 好在Google 提供了解决办法–AsyncTask异步加载工具
@@ -247,14 +247,14 @@ AsyncTask<Integer, Void, Bitmap>{
     task.execute(resId);
 }
 ```
-###使用Lrucache缓存图片
-####1. 为什么要缓存图片？
+### 使用Lrucache缓存图片
+#### 1. 为什么要缓存图片？
 对于如何高效的加载一张图片 ，我们似乎已经得心应手了，这里要泼一盆凉水给大家，因为我们的应用不仅只是加载一张图片这么简单，比如ListView, GridView or ViewPager，RecyclerView，需要立刻加载出大量的bitmap，滑动的过程不断加载bitmap，还要求不卡顿，内存够用，这似乎又是一件棘手的事情。
 
 Google 又提供了一种解决思路：对于ListView，RecyclerView，有可见的item和不可见的item，回收不可见的item 内存，分配给可见的，这样内存得到了重复利用，避免重复创建对象，不断申请并分配新的内存空间，触发最低内存限制的危险。
 
 所以我们要管理 这些 已经创建好的内存。
-####2. 使用内存缓存
+#### 2. 使用内存缓存
 1.为什么优先使用内存缓存？
 
 答：相比硬盘缓存的读取速度，读取内存中的数据更快
@@ -278,7 +278,7 @@ Lrucache就可以当作一种存储数据的结构，类似list，set，可以�
 
 ```这让我想起一个在项目开发中常见的bug，use a bitmap which has bean recycler```
 
-####3. Lrucache使用实例
+#### 3. Lrucache使用实例
 ```private LruCache<String, Bitmap> mMemoryCache;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -340,7 +340,7 @@ protected void onCreate(Bundle savedInstanceState) {
     ...
 }
 ```
-####4. 磁盘缓存
+#### 4. 磁盘缓存
 与内存缓存相结合的还有磁盘缓存，虽然磁盘读取速度较慢，但是持久存储的，不像内存缓存那样，在内存极限情况下仍然会被清理，比如后台正在执行数据加载，突然打进来一个电话，内存不足系统可能会进行垃圾回收。缓存就没有了
 
 Google官方提供直接DiskLruCache 类
@@ -445,7 +445,7 @@ public static File getDiskCacheDir(Context context, String uniqueName) {
     return new File(cachePath + File.separator + uniqueName);
 }
 ```
-####5.处理运行时变更的缓存 
+#### 5.处理运行时变更的缓存 
 当屏幕旋转，或者其他原因导致Activity restart，这个时候难道又让我们重新创建大量的图像资源？ 
 回答是否定的，Google提供了一种解决方案：
 
@@ -492,7 +492,7 @@ class RetainFragment extends Fragment {
 }
 ```
 
-####补充-UI组件并发性问题
+#### 补充-UI组件并发性问题
 **这一部分涉及到UI细节，例如ListView，Viewpager的优化**
 
 ViewPager是一个非常棒的组件，通过使用ViewPager和PagerAdapter可以实现类似新闻标题的滑动条以及常见的画廊功能。
@@ -653,7 +653,7 @@ public class ImageDetailFragment extends Fragment {
 ```
 `注意，只有阅读完上一篇内存优化中的Lrucache部分和AsyncTask部分才能保证你完全读懂上述代码`
 
-####RecyclerView GridView ListView
+#### RecyclerView GridView ListView
 下面可能是大家经常的做法：
 
 ```
@@ -737,7 +737,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 如果你能发现主线程加载图片的问题，恭喜你，有一点点进步。但是重复提醒你使用AsyncTask，显然不是我写这一节的目的。
 
 我们还需要警惕GridView 中的并发问题，因为iGridView 会回收子View的内存空间。
-####并发问题
+#### 并发问题
 像ListView和GridView，与RecyclerView使用AsyncTask的时候，不能忽视一个问题：Android系统为了高效分配内存，这些组件都会在上下滑动的时候回收子view的内存。在滑动的时候，并不能保证AsyncTask可以完成当前任务。此外，也不能保证异步任务可以按照顺序完成。
 
 Google在 Multithreading for Performance 提供了建议：在AsyncTask中，用弱引用来存储ImageView，通过使用弱引用来被检查ImageView是否加载完成
@@ -761,7 +761,7 @@ static class AsyncDrawable extends BitmapDrawable {
     }
 }
 ```
-#####2. 在执行BitmapWorkerTask之前，你需要创建 AsyncDrawable 并且绑定到ImageView上，通过如下代码：
+##### 2. 在执行BitmapWorkerTask之前，你需要创建 AsyncDrawable 并且绑定到ImageView上，通过如下代码：
 
 ```
 public void loadBitmap(int resId, ImageView imageView) {
@@ -776,7 +776,7 @@ public void loadBitmap(int resId, ImageView imageView) {
 ```
 
 
-#####3. 仅仅这些代码还是不够的，Google 还引入 cancelPotentialWork（）来检查是否有其他的task任务在使用当前ImageView，如果有，就会取消当前任务，取消这个做法是不是很让人眼前一亮呢！
+##### 3. 仅仅这些代码还是不够的，Google 还引入 cancelPotentialWork（）来检查是否有其他的task任务在使用当前ImageView，如果有，就会取消当前任务，取消这个做法是不是很让人眼前一亮呢！
 
 这是cancelPotentialWork（）的实现
 
@@ -799,7 +799,7 @@ public static boolean cancelPotentialWork(int data, ImageView imageView) {
     return true;
 }
 ```
-#####4. 我们还需要get方法获得相关的ImageView
+##### 4. 我们还需要get方法获得相关的ImageView
 ```
 private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
    if (imageView != null) {
@@ -813,7 +813,7 @@ private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
 }
 ```
 
-#####5. 最后就是更新task中的onPostExecute（）检查任务是否取消
+##### 5. 最后就是更新task中的onPostExecute（）检查任务是否取消
 
 ```
 class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
@@ -838,7 +838,7 @@ class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
 ```
 至此，我们已经了解Google 对于并发加载的解决方案，只需要在getView（）实现它们就可以啦！
 
-####在GridView解决并发
+#### 在GridView解决并发
 
 ```
 public class ImageGridFragment extends Fragment implements AdapterView.OnItemClickListener {
@@ -916,13 +916,13 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 这样就可以流畅的展示图片。
 
 
-####View Holder设计模式
+#### View Holder设计模式
 
 我们的代码可能会调用findViewById（），尤其是当滑动ListView，RecyclerView，GridView的时候，会使得app性能变得糟糕。甚至Adapter会返回一个已经被Android系统回收的View，可是你仍然需要初始化加载这个view并刷新它。
 
 Google提出了使用 “View Holder” 设计模式
 
-#####1. 首先创建 ViewHolder类，存储子View内部所有需要展示的布局
+##### 1. 首先创建 ViewHolder类，存储子View内部所有需要展示的布局
 
 ```
 static class ViewHolder {
@@ -934,7 +934,7 @@ static class ViewHolder {
 }
 ```
 
-#####2. 接着填充ViewHolder并且存储到布局中
+##### 2. 接着填充ViewHolder并且存储到布局中
 
 ```
 ViewHolder holder = new ViewHolder();
@@ -956,7 +956,7 @@ convertView.setTag(holder);
 
 ![](https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc9.png)
 
-###写本文所参考的：
+### 写本文所参考的：
 [1.Markdown字体颜色写法](http://blog.csdn.net/testcs_dn/article/details/45719357)
 
 [2.Google 官方 Android Performance 课程]()
