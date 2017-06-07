@@ -8,9 +8,7 @@
         * [自定义view](android/UI/index.md)
             - [自定义View - drawBitmap](android/UI/自定义view/自定义View_drawBitmap.md) 
             - [手把手教你用"视频"做闪屏页](android/UI/手把手教你用_视频_做闪屏页.md)  
-
-            
-    * [基础](android/基础/index.md)   
+    * [基础](android/基础/index.md)     
         - [Android Fragment的使用,一些你不可不知的注意事项](android/基础/Android_Fragment的使用_一些你不可不知的注意事项.md)    
         - [保证service不被杀死](android/基础/保证service不被杀死.md)  
         - [加速启动activity](android/基础/加速启动activity.md)   
@@ -43,11 +41,9 @@
         - [IntentService使用详解和实例介绍](android/基础/IntentService使用详解和实例介绍.md)   
         - [Json优劣势](android/基础/Json优劣势.md)   
         - [ListView优化](android/基础/ListView优化.md)   
-        - [Service全面总结](android/基础/Service全面总结.md)     
-       
+        - [Service全面总结](android/基础/Service全面总结.md)      
     * [通用](android/通用/index.md)  
-
-        - [IconFont使用](通用技术/通用/IconFont使用.md)  
+        - [IconFont使用](android/通用/IconFont使用.md)  
         - [Android进程管理三部曲[1]-进程的创建](android/通用/Android进程管理三部曲[1]-进程的创建.md)  
         - [Android进程管理三部曲[2]-进程的优先级](android/通用/Android进程管理三部曲[2]-进程的优先级)  
         - [Android进程管理三部曲[3]-内存的回收](android/通用/Android进程管理三部曲[3]-内存的回收.md)     
